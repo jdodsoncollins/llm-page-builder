@@ -1,5 +1,17 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## OpenAI-powered webpage generator
+The intent of this project is to leverage openAI products' abilities to generate valid webpages based on a prompt.
+
+The backend of this system will format the prompt to encourage consistent display.
+
+TODO:
+- UI Refinements
+- Export website or specific DOM nodes
+- "Login" UI for setting API key
+
+⚠️ As of right now, this project is very much a WIP ⚠️
+
 ## Getting Started
 
 First, run the development server:
