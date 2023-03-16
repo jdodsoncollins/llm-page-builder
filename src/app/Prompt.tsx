@@ -1,7 +1,7 @@
 import {FormEvent, useContext, useEffect, useState} from 'react'
 import {SiteContext} from "./SiteContext";
 
-const DEFAULT_PROMPT = `create a three column landing page about dolphins with a large hero section. in html and css please, with responsive design.`
+const DEFAULT_PROMPT = `create a three column landing page about dolphins with a large hero section`
 
 function Prompt() {
     const [prompt, setPrompt] = useState(DEFAULT_PROMPT);
@@ -33,6 +33,7 @@ function Prompt() {
             throw new Error(response.statusText);
         }
 
+        // todo: move to service
         const data = response.body;
         if (!data) {
             return;
@@ -53,6 +54,9 @@ function Prompt() {
         <div className="w-full max-w-xs">
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="prompt">
+                            Generate me a website with the contents...
+                        </label>
                         <textarea id="prompt"
                                   value={prompt}
                                   onChange={(e) => setPrompt(e.target.value)}

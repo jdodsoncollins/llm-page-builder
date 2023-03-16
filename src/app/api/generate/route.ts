@@ -1,25 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Configuration, OpenAIApi } from 'openai';
-import {OpenAIStream} from "@/util/openAiStream";
+import {ChatGPTMessage, OpenAIStream} from "@/util/openAiStream";
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
-export const config = {
-    runtime: "edge",
-};
-
+const formatPrompt = (prompt?: string) => {
+    return `
+    Create a HTML webpage with inline CSS. Each column or major section should have the attribute "data-export". Use the following content:
+    ${prompt || ''}
+    `
+}
 
 const handler = async (req: Request): Promise<Response> => {
-    const { prompt } = (await req.json()) as {
-        prompt?: string;
-    };
+    const { prompt } = (await req.json())
 
     const payload = {
-        model: "text-davinci-003",
-        prompt,
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: formatPrompt(prompt) } as ChatGPTMessage], // todo: unsure why this is a type failure
         temperature: 0.7,
         top_p: 1,
         frequency_penalty: 0,
