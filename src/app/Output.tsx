@@ -1,5 +1,5 @@
 import {useContext} from 'react'
-import {SiteContext} from "./SiteContext";
+import {SiteContext} from "./context/SiteContext";
 import IframeBuilder from "./IframeBuilder";
 
 function Output() {

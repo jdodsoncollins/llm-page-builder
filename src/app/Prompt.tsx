@@ -1,5 +1,6 @@
 import {FormEvent, useContext, useEffect, useState} from 'react'
-import {SiteContext} from "./SiteContext";
+import {Site, SiteContext} from "./context/SiteContext";
+import {useLocalStorage} from "@/util/hooks/localStorage";
 
 const DEFAULT_PROMPT = `create a three column landing page about dolphins with a large hero section`
 
@@ -7,11 +8,25 @@ function Prompt() {
     const [prompt, setPrompt] = useState(DEFAULT_PROMPT);
     const [siteStream, setSiteStream] = useState('');
     const { setSite, loading } = useContext(SiteContext);
+    const [siteStorage, setSiteStorage] = useLocalStorage<Site>("site", {
+        html: ''
+    });
+
+    // todo: move to wrapper
+    useEffect(() => {
+        setSite({
+            html: siteStorage.html
+        })
+
+    }, [])
 
     useEffect(() => {
         if (!loading && siteStream) {
             console.log({siteStream})
             setSite({
+                html: siteStream
+            })
+            setSiteStorage({
                 html: siteStream
             })
         }

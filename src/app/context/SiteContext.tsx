@@ -1,6 +1,6 @@
 import {createContext, useState} from 'react';
 
-interface Site {
+export interface Site {
     html: string,
     css?: string
 }

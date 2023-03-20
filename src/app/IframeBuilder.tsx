@@ -11,7 +11,7 @@ const IframeBuilder: FC<Props> = ({ content }) => {
 
     return (
         <div >
-            <iframe className="resize" ref={iframeRef} />
+            <iframe className="resize bg-white border-dashed border-2" ref={iframeRef} />
         </div>
     );
 }
