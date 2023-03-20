@@ -1,6 +1,12 @@
-import {FormEvent, useContext, useEffect, useState} from 'react'
+import React, {FormEvent, useContext, useEffect, useState} from 'react'
 import {Site, SiteContext} from "./context/SiteContext";
 import {useLocalStorage} from "@/util/hooks/localStorage";
+import {Textarea} from "@vechaiui/forms";
+import {Button} from "@vechaiui/button";
+import {
+    FormControl,
+    FormLabel,
+} from "@vechaiui/react"
 
 const DEFAULT_PROMPT = `create a three column landing page about dolphins with a large hero section`
 
@@ -69,21 +75,23 @@ function Prompt() {
         <div className="w-full max-w-xs">
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="prompt">
+                    <FormControl id="Prompt">
+                        <FormLabel htmlFor="prompt">
                             Generate me a website with the contents...
-                        </label>
-                        <textarea id="prompt"
+                        </FormLabel>
+                        <Textarea id="prompt"
                                   value={prompt}
                                   onChange={(e) => setPrompt(e.target.value)}
-                                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                  placeholder="Write your prompt here..."></textarea>
+                                  placeholder="Write your prompt here..."></Textarea>
+                    </FormControl>
                 </div>
                 <div className="flex items-center justify-between">
-                    <button
+                    <Button
+                        variant="solid"
                         type="submit"
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        >
                         Shuffle
-                    </button>
+                    </Button>
                 </div>
             </form>
         </div>

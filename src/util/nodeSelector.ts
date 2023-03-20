@@ -15,8 +15,6 @@ function embedNodeSelectorScript(iframe: HTMLIFrameElement) {
             })
         });
 
-        console.log(e);
-
     })
 }
 
