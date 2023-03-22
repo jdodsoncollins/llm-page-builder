@@ -6,7 +6,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     const inlineHTML = juice(htmlString)
 
-    return new Response(inlineHTML);
+    return new Response(JSON.stringify(inlineHTML));
 };
 
 

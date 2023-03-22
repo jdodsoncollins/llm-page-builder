@@ -29,12 +29,13 @@ function Prompt() {
 
     useEffect(() => {
         if (!loading && siteStream) {
-            inlineHTML().then(inlinedHTML => {
+            inlineHTML().then(inlinedHTMLRes => inlinedHTMLRes.json()).then((inlinedHTML) => {
+                console.log({inlinedHTML})
                 setSite({
-                    html: siteStream
+                    html: String(inlinedHTML)
                 })
                 setSiteStorage({
-                    html: siteStream
+                    html: String(inlinedHTML)
                 })
             })
         }
