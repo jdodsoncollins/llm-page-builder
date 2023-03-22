@@ -19,15 +19,26 @@ function Key() {
 
     // todo: move to wrapper
     useEffect(() => {
-        if (siteStorage.apiKey)
+        if (siteStorage.apiKey) {
             setPreferences({
-                apiKey: key
+                apiKey: siteStorage.apiKey
             })
+            setKey(siteStorage.apiKey)
+        }
     }, [])
+
+    useEffect(() => {
+        setPreferences({
+            apiKey: key
+        })
+        setSiteStorage({
+            apiKey: key
+        })
+    }, [key])
 
     return (
         <div className="w-full max-w-xs py-3">
-            <form className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form onSubmit={e => { e.preventDefault(); }} className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <FormControl id="key">
                         <Input.Group>

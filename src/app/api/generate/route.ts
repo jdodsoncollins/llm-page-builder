@@ -1,5 +1,9 @@
 import {ChatGPTMessage, OpenAIStream} from "@/util/openAiStream";
 
+export const config = {
+    runtime: 'edge'
+}
+
 const formatPrompt = (prompt?: string) => {
     return `
     You are a webpage builder, generating valid HTML and CSS landing pages. You use only simple, inline CSS, and you do not load any images. The document body, each column, or major section should have the attribute "data-export". Use the following content:
