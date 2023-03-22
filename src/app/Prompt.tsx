@@ -57,6 +57,10 @@ function Prompt() {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        setLoading(true);
+        setSite({html: ''})
+        setSiteStorage({html: ''})
+
         const response = await fetch("/api/generate", {
             method: "POST",
             headers: {
@@ -80,7 +84,6 @@ function Prompt() {
         const reader = data.getReader();
         const decoder = new TextDecoder();
         let done = false;
-        setLoading(true);
 
         while (!done) {
             const { value, done: doneReading } = await reader.read();
