@@ -14,7 +14,7 @@ function Prompt() {
     const [prompt, setPrompt] = useState(DEFAULT_PROMPT);
     const [loading, setLoading] = useState(false);
     const [siteStream, setSiteStream] = useState('');
-    const { setSite } = useContext(SiteContext);
+    const { setSite, preferences } = useContext(SiteContext);
     const [siteStorage, setSiteStorage] = useLocalStorage<Site>("site", {
         html: ''
     });
@@ -46,6 +46,7 @@ function Prompt() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+                apiKey: preferences.apiKey,
                 prompt,
             }),
         });

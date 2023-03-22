@@ -11,7 +11,7 @@ export interface Preferences {
     localStorage?: boolean
 }
 
-interface DefaultState {
+export interface DefaultState {
     site: Site,
     setSite: (site: Site) => void,
     preferences: Preferences,

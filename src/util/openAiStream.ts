@@ -12,6 +12,7 @@ export interface ChatGPTMessage {
 }
 
 export interface OpenAIStreamPayload {
+    apiKey?: string,
     model: string;
     messages: ChatGPTMessage[];
     temperature: number;
@@ -29,10 +30,13 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
 
     let counter = 0;
 
+    const key = payload.apiKey;
+    if (payload.apiKey) delete payload.apiKey
+
     const res = await fetch('https://api.openai.com/v1/chat/completions', {
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.OPENAI_API_KEY ?? ''}`,
+            Authorization: `Bearer ${payload.apiKey || process.env.NEXT_PUBLIC_OPENAI_API_KEY}`,
         },
         method: 'POST',
         body: JSON.stringify(payload),

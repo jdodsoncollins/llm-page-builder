@@ -1,11 +1,9 @@
 import React, {useContext} from 'react'
 import {SiteContext} from "./context/SiteContext";
 import IframeBuilder from "./IframeBuilder";
-import { Tab } from "@headlessui/react";
 import { RadioGroup } from "@headlessui/react";
-import {FormControl, FormLabel, Icon, Radio, cx, Avatar, IconButton} from "@vechaiui/react";
+import {IconButton} from "@vechaiui/react";
 import {ComputerDesktopIcon, DevicePhoneMobileIcon, DeviceTabletIcon} from "@heroicons/react/20/solid";
-import {Button} from "@vechaiui/button";
 import Instructions from "@/app/Instructions";
 
 function Output() {
