@@ -5,15 +5,16 @@ import {Textarea} from "@vechaiui/forms";
 import {Button} from "@vechaiui/button";
 import {
     FormControl,
-    FormLabel,
+    FormLabel, Spinner,
 } from "@vechaiui/react"
 
 const DEFAULT_PROMPT = `create a three column landing page about dolphins with a large hero section`
 
 function Prompt() {
     const [prompt, setPrompt] = useState(DEFAULT_PROMPT);
+    const [loading, setLoading] = useState(false);
     const [siteStream, setSiteStream] = useState('');
-    const { setSite, loading } = useContext(SiteContext);
+    const { setSite } = useContext(SiteContext);
     const [siteStorage, setSiteStorage] = useLocalStorage<Site>("site", {
         html: ''
     });
@@ -28,7 +29,6 @@ function Prompt() {
 
     useEffect(() => {
         if (!loading && siteStream) {
-            console.log({siteStream})
             setSite({
                 html: siteStream
             })
@@ -62,18 +62,20 @@ function Prompt() {
         const reader = data.getReader();
         const decoder = new TextDecoder();
         let done = false;
+        setLoading(true);
 
         while (!done) {
             const { value, done: doneReading } = await reader.read();
             done = doneReading;
+            if (doneReading) setLoading(false)
             const chunkValue = decoder.decode(value);
             setSiteStream((prev) => prev + chunkValue);
         }
     };
 
     return (
-        <div className="w-full max-w-xs">
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div className="w-full max-w-xs py-3">
+            <form onSubmit={handleSubmit} className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <FormControl id="Prompt">
                         <FormLabel htmlFor="prompt">
@@ -85,12 +87,13 @@ function Prompt() {
                                   placeholder="Write your prompt here..."></Textarea>
                     </FormControl>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between pb-8 ">
                     <Button
                         variant="solid"
                         type="submit"
+                        disabled={loading}
                         >
-                        Shuffle
+                        {loading ? <Spinner className="text-primary-500" /> : siteStream ? "Re-generate" : "Generate" }
                     </Button>
                 </div>
             </form>

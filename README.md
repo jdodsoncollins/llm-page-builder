@@ -1,34 +1,49 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## OpenAI-powered webpage generator
-The intent of this project is to leverage openAI products' abilities to generate valid webpages based on a prompt.
 
-The backend of this system will format the prompt to encourage consistent display.
+This project generates pages via a formatted prompt sent to gpt3-turbo, and then renders output with the ability to click DOM nodes to copy to your clipboard.
+
+## Why
+The intent of this project is to leverage openAI products' abilities to generate valid webpages based on a prompt, and experiment with processing the output for actual usage outside this utility webapp. 
+
+The backend of this system does some light [Prompt Engineering](https://github.com/dair-ai/Prompt-Engineering-Guide) on top of user input to encourage consistent display.
+
+Output from gpt3-turbo is recieved from the nextJS API route, then further processed on the client to inline CSS, and add JS and CSS to the DOM for element export.
 
 TODO:
 - UI Refinements
-- Export website or specific DOM nodes
 - "Login" UI for setting API key
 
 ⚠️ As of right now, this project is very much a WIP ⚠️
 
 ## Getting Started
 
-First, run the development server:
+Do your basic setup
+
+```bash
+npm i
+```
+(or yarn or pnpm equivalent)
+
+Then, set your [OpenAI API key](https://platform.openai.com/account/api-keys) (or use the GUI if you prefer)
+
+```bash
+cp .env.sample .env
+```
+and set your API key in place of the sample key
+
+Finally, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
+(or yarn or pnpm equivalent)
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 

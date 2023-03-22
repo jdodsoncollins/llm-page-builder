@@ -6,7 +6,7 @@ import {VechaiProvider} from "@vechaiui/react";
 
 export default function Home() {
   return (
-    <main className={'h-screen w-screen'}>
+    <main>
         <VechaiProvider>
           <SiteProvider>
             <Prompt />

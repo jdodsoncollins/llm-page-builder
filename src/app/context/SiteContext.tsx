@@ -5,10 +5,18 @@ export interface Site {
     css?: string
 }
 
-interface SiteState {
+export interface Preferences {
+    size?: 'sm' | 'md' | 'lg',
+    apiKey?: string,
+    localStorage?: boolean
+}
+
+interface DefaultState {
     site: Site,
     setSite: (site: Site) => void,
-    loading: boolean,
+    preferences: Preferences,
+    setPreferences: (value: Partial<Preferences>) => void,
+
 }
 
 export let defaultSiteState: Site = {
@@ -16,4 +24,12 @@ export let defaultSiteState: Site = {
     css: ''
 }
 
-export const SiteContext = createContext<SiteState>({site: defaultSiteState, setSite: (site: Site) => defaultSiteState = { ...site }, loading: false});
+export let defaultPreferences: Preferences = {
+    size: 'md',
+    apiKey: 'enter open AI key here',
+    localStorage: true
+}
+
+
+
+export const SiteContext = createContext<DefaultState>({site: defaultSiteState, setSite: (site: Site) => {}, preferences: defaultPreferences, setPreferences: (prefs: Partial<Preferences>) => {}});
