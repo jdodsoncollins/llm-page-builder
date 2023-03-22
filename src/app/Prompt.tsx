@@ -29,14 +29,30 @@ function Prompt() {
 
     useEffect(() => {
         if (!loading && siteStream) {
-            setSite({
-                html: siteStream
-            })
-            setSiteStorage({
-                html: siteStream
+            inlineHTML().then(inlinedHTML => {
+                setSite({
+                    html: siteStream
+                })
+                setSiteStorage({
+                    html: siteStream
+                })
             })
         }
     }, [siteStream, loading])
+
+    const inlineHTML = async () => {
+        return await fetch("/api/inline", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                htmlString: siteStream
+            }),
+        });
+    }
+
+    // todo: move to service
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -55,7 +71,7 @@ function Prompt() {
             throw new Error(response.statusText);
         }
 
-        // todo: move to service
+
         const data = response.body;
         if (!data) {
             return;
