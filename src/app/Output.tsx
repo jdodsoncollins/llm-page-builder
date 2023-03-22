@@ -12,8 +12,8 @@ function Output() {
     return (
         <>
             <Instructions />
-            <div className="flex flex-wrap w-full p-8 space-x-4 relative">
-                <div style={{position: 'absolute', top: '10px', left: '10px'}}>
+            <div className="rounded px-8 pt-6 pb-8 mb-4 relative">
+                <div style={{position: 'absolute', top: '30px', left: '40px'}}>
                     <RadioGroup value={preferences.size}>
                         <RadioGroup.Label className={'flex'}>
                             <RadioGroup.Option value="sm" onClick={() => setPreferences({size: 'sm'})}>

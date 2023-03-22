@@ -7,8 +7,8 @@ function Instructions() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <Disclosure as="div" className="mt-2">
-                <>
+        <Disclosure as="div" className="rounded px-8 pt-6 pb-8 mb-4">
+                <div>
                     <Disclosure.Button
                         onClick={() => setIsOpen(!isOpen)}
                         className={cx(
@@ -27,7 +27,7 @@ function Instructions() {
                             <li>Click an element below, and its HTML will be copied to your clipboard</li>
                         </ul>
                     </Disclosure.Panel>
-                </>
+                </div>
         </Disclosure>
     );
 }

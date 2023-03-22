@@ -1,7 +1,7 @@
 import React, {FormEvent, useContext, useEffect, useState} from 'react'
 import {Preferences, SiteContext} from "./context/SiteContext";
 import {useLocalStorage} from "@/util/hooks/localStorage";
-import { Input } from "@vechaiui/react"
+import {FormLabel, Input} from "@vechaiui/react"
 import {
     FormControl,
 } from "@vechaiui/react"
@@ -37,16 +37,16 @@ function Key() {
     }, [key])
 
     return (
-        <div className="w-full max-w-xs py-3">
+        <div className="w-full py-3">
             <form onSubmit={e => { e.preventDefault(); }} className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <FormControl id="key">
+                        <FormLabel htmlFor="key" className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            OpenAI API key
+                        </FormLabel>
                         <Input.Group>
-                            <Input placeholder="Enter your OpenAI API key here, or set in .env if running locally" value={key} onBlur={(e) => setKey(e.target.value)} onChange={(e) => setKey(e.target.value)}
+                            <Input id="key" className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your OpenAI API key here, or set in .env if running locally" value={key} onBlur={(e) => setKey(e.target.value)} onChange={(e) => setKey(e.target.value)}
                             />
-                            <Input.RightElement>
-                                <KeyIcon className="w-4 h-4 text-green-500" />
-                            </Input.RightElement>
                         </Input.Group>
                     </FormControl>
                 </div>

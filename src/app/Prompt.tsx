@@ -95,15 +95,16 @@ function Prompt() {
     };
 
     return (
-        <div className="w-full max-w-xs py-3">
+        <div className="w-full py-3">
             <form onSubmit={handleSubmit} className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <FormControl id="Prompt">
-                        <FormLabel htmlFor="prompt">
+                        <FormLabel htmlFor="prompt" className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Generate me a website with the contents...
                         </FormLabel>
                         <Textarea id="prompt"
                                   value={prompt}
+                                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                   onChange={(e) => setPrompt(e.target.value)}
                                   placeholder="Write your prompt here..."></Textarea>
                     </FormControl>
