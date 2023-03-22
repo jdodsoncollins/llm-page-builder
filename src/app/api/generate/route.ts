@@ -12,7 +12,7 @@ const formatPrompt = (prompt?: string) => {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-    const { prompt, apiKey } = (await req.json())
+    const { prompt, apiKey, temperature } = (await req.json())
 
     const payload = {
         apiKey,

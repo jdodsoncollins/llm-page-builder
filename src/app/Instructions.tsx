@@ -22,9 +22,10 @@ function Instructions() {
                     </Disclosure.Button>
                     <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-muted">
                         <ul className="list-disc">
-                            <li>gpt-3.5-turbo generates a page based on the above description, and is instructed to add `data-export` to each major section. The HTML/CSS outputted is processed to add click-handlers to each of these sections.</li>
-                            <li>Results may take a few seconds to begin loading</li>
-                            <li>Click an element below, and its HTML will be copied to your clipboard</li>
+                            <li>🤖 gpt-3.5-turbo generates a page based on the above description, and is instructed to add `data-export` to each major section. The HTML/CSS outputted is inlined, and processed to add click-handlers to each section.</li>
+                            <li>⏲ Results may take a few seconds to begin loading</li>
+                            <li>📋Content is saved to local storage if you need to refresh</li>
+                            <li>👉<strong>Click an element below, and its HTML will be copied to your clipboard</strong> 👈</li>
                         </ul>
                     </Disclosure.Panel>
                 </div>

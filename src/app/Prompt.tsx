@@ -8,7 +8,9 @@ import {
     FormLabel,
 } from "@vechaiui/react"
 
-const DEFAULT_PROMPT = `create a three column landing page about dolphins with a large hero section`
+const awesomeThings = ["dinosaurs", "dolphins", "sharks", "tigers", "airplanes", "rocket ships", "space"]
+
+const DEFAULT_PROMPT = `a three column landing page about ${awesomeThings[Math.floor(Math.random() * 7)]} with a large hero section`
 
 const Spinner = () =>
     <div role="status">
@@ -24,8 +26,21 @@ const Spinner = () =>
         <span className="sr-only">Loading...</span>
     </div>
 
+const Slider = ({value, setValue}: {value: number, setValue: (v: number) => void}) =>
+    <div className="pt-2 pb-3">
+        <label htmlFor="default-range" className="block tracking-wide text-gray-700 text-xs font-bold mb-2e">Temperature (Higher means more "randomness". Currently {value})</label>
+        <div className="flex items-center">
+            <span className="p-1">🧊</span><input id="default-range" type="range" min="0" max="1" step="0.1" value={value} onChange={(e) => setValue(Number(e.target.value))}
+                                                 className="w-full h-2 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" /><span className="p-1">🥵</span>
+        </div>
+    </div>
+
+
 function Prompt() {
+
+    // todo: messy!
     const [prompt, setPrompt] = useState(DEFAULT_PROMPT);
+    const [temperature, setTemperature] = useState(0.7);
     const [loading, setLoading] = useState(false);
     const [siteStream, setSiteStream] = useState('');
     const { setSite, preferences } = useContext(SiteContext);
@@ -82,6 +97,7 @@ function Prompt() {
             },
             body: JSON.stringify({
                 apiKey: preferences.apiKey,
+                temperature,
                 prompt,
             }),
         });
@@ -123,6 +139,7 @@ function Prompt() {
                                   placeholder="Write your prompt here..."></Textarea>
                     </FormControl>
                 </div>
+                <Slider value={temperature} setValue={setTemperature} />
                 <div className="flex items-center justify-between pb-8 ">
                     <Button
                         variant="solid"
