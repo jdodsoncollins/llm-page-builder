@@ -1,4 +1,4 @@
-import {FC, useContext, useRef} from 'react'
+import {FC, useContext, useEffect, useRef} from 'react'
 import {writeIframeDocument} from "@/util/iframe";
 import {cx, useNotification} from "@vechaiui/react";
 import {Preferences, SiteContext} from "@/app/context/SiteContext";
@@ -24,8 +24,8 @@ const IframeBuilder: FC<Props> = ({ content, size }) => {
         });
     };
 
-    const sizeClass= () => {
-        return `device-${preferences.size}`
+    const sizeClass = () => {
+        return `device-${preferences.size || 'sm'}`
     }
 
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -47,7 +47,7 @@ const IframeBuilder: FC<Props> = ({ content, size }) => {
 
     return (
         <div >
-            <iframe className={cx(sizeClass(), 'resize bg-white border-dashed border-2')} style={{'resize': 'both'}} ref={iframeRef} />
+            <iframe className={cx(sizeClass(), 'bg-white border-dashed border-2')} ref={iframeRef} />
         </div>
     );
 }

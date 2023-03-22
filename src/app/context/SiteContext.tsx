@@ -30,6 +30,4 @@ export let defaultPreferences: Preferences = {
     localStorage: true
 }
 
-
-
 export const SiteContext = createContext<DefaultState>({site: defaultSiteState, setSite: (site: Site) => {}, preferences: defaultPreferences, setPreferences: (prefs: Partial<Preferences>) => {}});
