@@ -2,19 +2,18 @@
 import SiteProvider from "@/app/context/SiteProvider";
 import Output from "@/app/Output";
 import Prompt from "@/app/Prompt";
-import {VechaiProvider} from "@vechaiui/react";
 import Key from "@/app/Key";
+import {Toaster} from "react-hot-toast";
 
 export default function Home() {
   return (
     <main>
-        <VechaiProvider>
-          <SiteProvider>
-            <Key />
-            <Prompt />
-            <Output />
-          </SiteProvider>
-        </VechaiProvider>
+      <SiteProvider>
+        <Key />
+        <Prompt />
+        <Output />
+      </SiteProvider>
+        <Toaster />
     </main>
   )
 }

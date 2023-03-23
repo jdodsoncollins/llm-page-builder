@@ -1,12 +1,6 @@
 import React, {FormEvent, useContext, useEffect, useState} from 'react'
 import {Preferences, SiteContext} from "./context/SiteContext";
 import {useLocalStorage} from "@/util/hooks/localStorage";
-import {FormLabel, Input} from "@vechaiui/react"
-import {
-    FormControl,
-} from "@vechaiui/react"
-import {KeyIcon} from "@heroicons/react/20/solid";
-import {DomEvent} from "@react-three/fiber/dist/declarations/src/core/events";
 
 const DEFAULT_KEY = (process.env.NEXT_PUBLIC_OPENAI_API_KEY);
 
@@ -40,15 +34,11 @@ function Key() {
         <div className="w-full py-3">
             <form onSubmit={e => { e.preventDefault(); }} className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
-                    <FormControl id="key">
-                        <FormLabel htmlFor="key" className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
-                            OpenAI API key
-                        </FormLabel>
-                        <Input.Group>
-                            <Input id="key" className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your OpenAI API key here, or set in .env if running locally" value={key} onBlur={(e) => setKey(e.target.value)} onChange={(e) => setKey(e.target.value)}
-                            />
-                        </Input.Group>
-                    </FormControl>
+                    <label htmlFor="key" className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        OpenAI API key
+                    </label>
+                        <input id="key" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your OpenAI API key here, or set in .env if running locally" value={key} onBlur={(e) => setKey(e.target.value)} onChange={(e) => setKey(e.target.value)}
+                        />
                 </div>
             </form>
         </div>

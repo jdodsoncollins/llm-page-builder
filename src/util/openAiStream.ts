@@ -44,7 +44,6 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
 
     const stream = new ReadableStream({
         async start(controller) {
-            // callback
             function onParse(event: ParsedEvent | ReconnectInterval) {
                 if (event.type === 'event') {
                     const data = event.data;
@@ -70,10 +69,7 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
                 }
             }
 
-            // stream response (SSE) from OpenAI may be fragmented into multiple chunks
-            // this ensures we properly read chunks and invoke an event for each SSE event stream
             const parser = createParser(onParse);
-            // https://web.dev/streams/#asynchronous-iteration
             for await (const chunk of res.body as any) {
                 parser.feed(decoder.decode(chunk));
             }

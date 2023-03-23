@@ -1,32 +1,45 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {SiteContext} from "./context/SiteContext";
 import IframeBuilder from "./IframeBuilder";
-import { RadioGroup } from "@headlessui/react";
-import {IconButton} from "@vechaiui/react";
+import { Tab } from "@headlessui/react";
 import {ComputerDesktopIcon, DevicePhoneMobileIcon, DeviceTabletIcon} from "@heroicons/react/20/solid";
 import Instructions from "@/app/Instructions";
 
+function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(' ')
+}
+
 function Output() {
     const { site, preferences, setPreferences } = useContext(SiteContext);
+    const [selectedIndex, setSelectedIndex] = useState(0)
+
+    useEffect(() => {
+        if (preferences.size === 'md') return setSelectedIndex(1);
+        if (preferences.size === 'lg') return setSelectedIndex(2);
+        setSelectedIndex(0);
+    }, [preferences])
+
+    const tabClasses = ({ selected }: { selected: boolean }) =>
+        classNames(
+            'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
+            'focus:outline-none focus:ring-2 flex justify-center',
+            selected
+                ? 'bg-white shadow'
+                : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+        )
 
     return (
         <>
             <Instructions />
             <div className="rounded px-8 pt-6 pb-8 mb-4 relative">
-                <div style={{position: 'absolute', top: '30px', left: '40px'}}>
-                    <RadioGroup value={preferences.size}>
-                        <RadioGroup.Label className={'flex'}>
-                            <RadioGroup.Option value="sm" onClick={() => setPreferences({size: 'sm'})}>
-                                <IconButton variant="solid" color={preferences.size === 'sm' ? "primary" : "secondary"}><DevicePhoneMobileIcon className="h-6 w-6"/></IconButton>
-                            </RadioGroup.Option>
-                            <RadioGroup.Option value="md" onClick={() => setPreferences({size: 'md'})}>
-                                <IconButton variant="solid" color={preferences.size === 'md' ? "primary" : "secondary"}><DeviceTabletIcon className="h-6 w-6"/></IconButton>
-                            </RadioGroup.Option>
-                            <RadioGroup.Option value="lg" onClick={() => setPreferences({size: 'lg'})}>
-                                <IconButton variant="solid" color={preferences.size === 'lg' ? "primary" : "secondary"}><ComputerDesktopIcon className="h-6 w-6"/></IconButton>
-                            </RadioGroup.Option>
-                        </RadioGroup.Label>
-                    </RadioGroup>
+                <div className="w-full px-2 sm:px-0">
+                    <Tab.Group selectedIndex={selectedIndex}>
+                        <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+                            <Tab className={tabClasses} onClick={() => setPreferences({size: 'sm'})}><DevicePhoneMobileIcon className="h-6 w-6"/></Tab>
+                            <Tab className={tabClasses} onClick={() => setPreferences({size: 'md'})}><DeviceTabletIcon className="h-6 w-6"/></Tab>
+                            <Tab className={tabClasses} onClick={() => setPreferences({size: 'lg'})}><ComputerDesktopIcon className="h-6 w-6"/></Tab>
+                        </Tab.List>
+                    </Tab.Group>
                 </div>
             <IframeBuilder content={site.html} size={preferences.size} />
             </div>

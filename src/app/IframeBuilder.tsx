@@ -1,7 +1,7 @@
-import {FC, useContext, useEffect, useRef} from 'react'
+import {FC, useContext, useRef} from 'react'
 import {writeIframeDocument} from "@/util/iframe";
-import {cx, useNotification} from "@vechaiui/react";
 import {Preferences, SiteContext} from "@/app/context/SiteContext";
+import toast from 'react-hot-toast';
 
 interface Props {
     content: string,
@@ -9,7 +9,6 @@ interface Props {
 }
 
 const IframeBuilder: FC<Props> = ({ content, size }) => {
-    const notification = useNotification();
     const { preferences } = useContext(SiteContext);
 
     const onCopy = (e: Element) => {
@@ -17,11 +16,7 @@ const IframeBuilder: FC<Props> = ({ content, size }) => {
         setTimeout(() => {
             e.classList.remove('element-clicked')
         }, 1000)
-        notification({
-            title: "Element copied to clipboard",
-            status: "success",
-            position: "top",
-        });
+        toast("Element copied to clipboard");
     };
 
     const sizeClass = () => {
@@ -34,9 +29,8 @@ const IframeBuilder: FC<Props> = ({ content, size }) => {
 
         e.addEventListener('click', async (l) => {
             l.stopPropagation();
-            console.log(e)
             if (!navigator.clipboard) {
-
+                toast('Copy to clipboard failed')
             }
             await navigator.clipboard.writeText(e.innerHTML).catch((e) => {
             })
@@ -47,7 +41,7 @@ const IframeBuilder: FC<Props> = ({ content, size }) => {
 
     return (
         <div >
-            <iframe className={cx(sizeClass(), 'bg-white border-dashed border-2')} ref={iframeRef} />
+            <iframe className={sizeClass() + ' bg-white border-dashed border-2'} ref={iframeRef} />
         </div>
     );
 }

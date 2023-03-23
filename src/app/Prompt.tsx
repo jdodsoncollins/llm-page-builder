@@ -1,12 +1,6 @@
 import React, {FormEvent, useContext, useEffect, useState} from 'react'
 import {Site, SiteContext} from "./context/SiteContext";
 import {useLocalStorage} from "@/util/hooks/localStorage";
-import {Textarea} from "@vechaiui/forms";
-import {Button} from "@vechaiui/button";
-import {
-    FormControl,
-    FormLabel,
-} from "@vechaiui/react"
 
 const awesomeThings = ["dinosaurs", "dolphins", "sharks", "tigers", "airplanes", "rocket ships", "space"]
 
@@ -28,10 +22,10 @@ const Spinner = () =>
 
 const Slider = ({value, setValue}: {value: number, setValue: (v: number) => void}) =>
     <div className="pt-2 pb-3">
-        <label htmlFor="default-range" className="block tracking-wide text-gray-700 text-xs font-bold mb-2e">Temperature (Higher means more "randomness". Currently {value})</label>
+        <label htmlFor="default-range" className="block tracking-wide text-gray-700 text-xs font-bold mb-2e">Temperature (Higher means more `&quot;randomness`&quot;. Currently {value})</label>
         <div className="flex items-center">
-            <span className="p-1">🧊</span><input id="default-range" type="range" min="0" max="1" step="0.1" value={value} onChange={(e) => setValue(Number(e.target.value))}
-                                                 className="w-full h-2 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" /><span className="p-1">🥵</span>
+            <span className="p-1">❄️</span><input id="default-range" type="range" min="0" max="1" step="0.1" value={value} onChange={(e) => setValue(Number(e.target.value))}
+                                                 className="w-full h-2 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" /><span className="p-1">🔥</span>
         </div>
     </div>
 
@@ -128,27 +122,24 @@ function Prompt() {
         <div className="w-full py-3">
             <form onSubmit={handleSubmit} className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
-                    <FormControl id="Prompt">
-                        <FormLabel htmlFor="prompt" className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        <label htmlFor="prompt" className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Generate me a website with the contents...
-                        </FormLabel>
-                        <Textarea id="prompt"
+                        </label>
+                        <textarea id="prompt"
                                   value={prompt}
                                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                   onChange={(e) => setPrompt(e.target.value)}
-                                  placeholder="Write your prompt here..."></Textarea>
-                    </FormControl>
+                                  placeholder="Write your prompt here..."></textarea>
                 </div>
                 <Slider value={temperature} setValue={setTemperature} />
                 <div className="flex items-center justify-between pb-8 ">
-                    <Button
-                        variant="solid"
+                    <button
                         type="submit"
                         className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                         disabled={loading}
                         >
                         {loading ? <Spinner /> : siteStream ? "Re-generate" : "Generate" }
-                    </Button>
+                    </button>
                 </div>
             </form>
         </div>
