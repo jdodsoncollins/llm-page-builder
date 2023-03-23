@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 This project generates pages via a formatted prompt sent to gpt3-turbo, and then renders output with the ability to click DOM nodes to copy to your clipboard.
 
-[View deployment on Vercel](llm-page-builder.vercel.app) (note: using "hobby" tier; your own openAI API key is needed)
+[View deployment on Vercel](https://llm-page-builder.vercel.app) (note: using "hobby" tier; your own openAI API key is needed)
 
 ## Why
 The intent of this project is to leverage openAI products' abilities to generate valid webpages based on a prompt, and experiment with processing the output for actual usage outside this utility webapp. 
